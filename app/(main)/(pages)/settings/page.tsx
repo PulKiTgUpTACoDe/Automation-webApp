@@ -10,7 +10,7 @@ const Settings = async (props: Props) => {
   const authUser = await currentUser()
   if (!authUser) return null
 
-  // const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
+  const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
 
   const removeProfileImage = async () => {
     'use server'
@@ -66,15 +66,15 @@ const Settings = async (props: Props) => {
             Add or update your information
           </p>
         </div>
-        {/* <ProfilePicture
+        <ProfilePicture
           onDelete={removeProfileImage}
           userImage={user?.profileImage || ''}
           onUpload={uploadProfileImage}
-        /> */}
-        {/* <ProfileForm
+        />
+        <ProfileForm
           user={user}
           onUpdate={updateUserInfo}
-        /> */}
+        />
       </div>
     </div>
   )

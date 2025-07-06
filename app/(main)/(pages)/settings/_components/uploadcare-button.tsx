@@ -1,48 +1,83 @@
-'use client'
-import React, { useEffect, useRef } from 'react'
-import * as LR from '@uploadcare/blocks'
-import { useRouter } from 'next/navigation'
+"use client";
+
+import { useState } from "react";
+import { pinata } from "@/utils/config";
+import { Button } from "@/components/ui/button";
+import { Upload, Loader2 } from "lucide-react";
 
 type Props = {
-  onUpload: (e: string) => any
-}
+  onUpload: (url: string) => Promise<any>;
+};
 
-LR.registerBlocks(LR)
+export default function UploadCareButton({ onUpload }: Props) {
+  const [file, setFile] = useState<File>();
+  const [uploading, setUploading] = useState(false);
 
-const UploadCareButton = ({ onUpload }: Props) => {
-  const router = useRouter()
-  const ctxProviderRef = useRef<
-    typeof LR.UploadCtxProvider.prototype & LR.UploadCtxProvider
-  >(null)
-
-  useEffect(() => {
-    const handleUpload = async (e: any) => {
-      const file = await onUpload(e.detail.cdnUrl)
-      if (file) {
-        router.refresh()
-      }
+  const uploadFile = async () => {
+    if (!file) {
+      alert("No file selected");
+      return;
     }
-    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload)
-  }, [])
+
+    try {
+      setUploading(true);
+      const urlRequest = await fetch("/api/url"); // Fetches the temporary upload URL
+      const urlResponse = await urlRequest.json(); // Parse response
+      const upload = await pinata.upload.public.file(file).url(urlResponse.url); // Upload the file with the signed URL
+      const fileUrl = await pinata.gateways.public.convert(upload.cid);
+
+      // Call the onUpload callback with the uploaded URL
+      await onUpload(fileUrl);
+      setUploading(false);
+    } catch (e) {
+      console.log(e);
+      setUploading(false);
+      alert("Trouble uploading file");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target?.files?.[0]);
+  };
 
   return (
-    <div>
-      <lr-config
-        ctx-name="my-uploader"
-        pubkey="a9428ff5ff90ae7a64eb"
-      />
-
-      <lr-file-uploader-regular
-        ctx-name="my-uploader"
-        css-src={`https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.35.2/web/lr-file-uploader-regular.min.css`}
-      />
-
-      <lr-upload-ctx-provider
-        ctx-name="my-uploader"
-        ref={ctxProviderRef}
-      />
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex items-center gap-4">
+        <input
+          type="file"
+          onChange={handleChange}
+          accept="image/*"
+          className="hidden"
+          id="profile-upload"
+        />
+        <label
+          htmlFor="profile-upload"
+          className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md flex items-center gap-2"
+        >
+          <Upload className="h-4 w-4" />
+          Choose Image
+        </label>
+        {file && (
+          <Button
+            type="button"
+            disabled={uploading}
+            onClick={uploadFile}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            {uploading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              "Upload"
+            )}
+          </Button>
+        )}
+      </div>
+      {file && (
+        <p className="text-sm text-muted-foreground">Selected: {file.name}</p>
+      )}
     </div>
-  )
+  );
 }
-
-export default UploadCareButton
