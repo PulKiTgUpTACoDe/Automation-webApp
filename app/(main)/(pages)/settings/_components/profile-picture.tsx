@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import UploadCareButton from "./uploadcare-button";
+import UploadImgButton from "./uploadImg-button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,7 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-primary/20 bg-muted flex items-center justify-center">
               <User className="h-16 w-16 text-muted-foreground" />
             </div>
-            <UploadCareButton onUpload={handleUpload} />
+            <UploadImgButton onUpload={handleUpload} />
           </>
         )}
       </div>

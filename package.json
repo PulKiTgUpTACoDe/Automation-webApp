@@ -31,8 +31,6 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "@types/uuid": "^10.0.0",
-    "@uploadcare/blocks": "^0.50.4",
-    "@uploadcare/file-uploader": "^1.18.0",
     "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

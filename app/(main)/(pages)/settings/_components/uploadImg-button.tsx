@@ -9,7 +9,7 @@ type Props = {
   onUpload: (url: string) => Promise<any>;
 };
 
-export default function UploadCareButton({ onUpload }: Props) {
+export default function UploadImgButton({ onUpload }: Props) {
   const [file, setFile] = useState<File>();
   const [uploading, setUploading] = useState(false);
 

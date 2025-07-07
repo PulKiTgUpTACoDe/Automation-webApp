@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -48,7 +48,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-6 w-1/2 "
         onSubmit={form.handleSubmit(handleSubmit)}
       >
         <FormField
@@ -62,6 +62,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
                 <Input
                   {...field}
                   placeholder="Name"
+                  className='border-1 border-neutral-500'
                 />
               </FormControl>
               <FormMessage />
