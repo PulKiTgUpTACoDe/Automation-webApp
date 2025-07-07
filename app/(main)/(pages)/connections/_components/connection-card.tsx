@@ -58,7 +58,7 @@ const ConnectionCard = ({
                 ? process.env.NEXT_PUBLIC_SLACK_REDIRECT!
                 : '#'
             }
-            className=" rounded-lg bg-primary p-2 font-bold text-primary-foreground"
+            className=" rounded-lg bg-white p-2 font-bold text-black hover:bg-neutral-400"
           >
             Connect
           </Link>

@@ -33,7 +33,7 @@ const MenuOptions = (props: Props) => {
   return (
     <>
       <style>{scrollbarStyle}</style>
-      <nav className=" dark:bg-black h-screen justify-between flex items-center flex-col py-2 px-2 sticky top-0">
+      <nav className=" dark:bg-black h-screen justify-between flex items-center flex-col py-2 px-2 sticky top-0 z-20">
         <div className="flex items-center justify-center flex-col gap-4 pt-2">
           <Link className="flex font-bold flex-row p-2 pb-5" href="/">
             autoRobo.

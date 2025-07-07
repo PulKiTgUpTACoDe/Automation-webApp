@@ -103,7 +103,7 @@ const Workflowform = ({ subTitle, title }: Props) => {
               )}
             />
             <Button
-              className="mt-4"
+              className="mt-4 bg-white text-black hover:bg-neutral-900 hover:text-white hover:cursor-pointer"
               disabled={isLoading}
               type="submit"
             >
