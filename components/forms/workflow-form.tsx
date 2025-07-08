@@ -55,7 +55,7 @@ const Workflowform = ({ subTitle, title }: Props) => {
   }
 
   return (
-    <Card className="w-full max-w-[650px] border-none">
+    <Card className="w-full max-w-[650px] border-none p-4">
       {title && subTitle && (
         <CardHeader>
           <CardTitle>{title}</CardTitle>
