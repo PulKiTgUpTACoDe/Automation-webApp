@@ -10,7 +10,7 @@ const Page = (props: Props) => {
     <div className='h-full'>
         <EditorProvider>
           <ConnectionsProvider>
-            <EditorCanvas></EditorCanvas>
+            <EditorCanvas />
           </ConnectionsProvider>
         </EditorProvider>
     </div>
