@@ -2,6 +2,7 @@ import { ConnectionProviderProps } from '@/providers/connections-provider'
 import { EditorState } from '@/providers/editor-provider'
 import { useautoRoboStore } from '@/store'
 import React from 'react'
+import ContentBasedOnTitle from './content-based-on-title'
 // import ContentBasedOnTitle from './content-based-on-title'
 
 type Props = {
@@ -17,15 +18,14 @@ const RenderOutputAccordion = ({ state, nodeConnection }: Props) => {
     setSelectedSlackChannels,
   } = useautoRoboStore()
   return (
-    // <ContentBasedOnTitle
-    //   nodeConnection={nodeConnection}
-    //   newState={state}
-    //   file={googleFile}
-    //   setFile={setGoogleFile}
-    //   selectedSlackChannels={selectedSlackChannels}
-    //   setSelectedSlackChannels={setSelectedSlackChannels}
-    // />
-    <div></div>
+    <ContentBasedOnTitle
+      nodeConnection={nodeConnection}
+      newState={state}
+      file={googleFile}
+      setFile={setGoogleFile}
+      selectedSlackChannels={selectedSlackChannels}
+      setSelectedSlackChannels={setSelectedSlackChannels}
+    />
   )
 }
 

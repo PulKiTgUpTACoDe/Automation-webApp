@@ -19,6 +19,9 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
 import { onContentChange } from "@/lib/editor-utils";
+import GoogleFileDetails from "./google-file-details";
+import ActionButton from "./action-button";
+import GoogleDriveFiles from "./google-drive-files";
 
 export interface Option {
   value: string;
@@ -114,23 +117,23 @@ const ContentBasedOnTitle = ({
                 <div className="flex flex-col gap-4">
                   <CardDescription>Drive File</CardDescription>
                   <div className="flex flex-wrap gap-2">
-                    {/* <GoogleFileDetails
+                    <GoogleFileDetails
                       nodeConnection={nodeConnection}
                       title={title}
                       gFile={file}
-                    /> */}
+                    />
                   </div>
                 </div>
               </CardContent>
             </Card>
           )}
-          {/* {title === 'Google Drive' && <GoogleDriveFiles />}
+          {title === 'Google Drive' && <GoogleDriveFiles />}
           <ActionButton
             currentService={title}
             nodeConnection={nodeConnection}
             channels={selectedSlackChannels}
             setChannels={setSelectedSlackChannels}
-          /> */}
+          />
         </div>
       </Card>
     </AccordionContent>

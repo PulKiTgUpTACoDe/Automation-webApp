@@ -13,25 +13,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-// import {
-//   fetchBotSlackChannels,
-//   onConnections,
-//   onDragStart,
-// } from '@/lib/editor-utils'
-// import EditorCanvasIconHelper from './editor-canvas-card-icon-hepler'
+import {
+  fetchBotSlackChannels,
+  onConnections,
+  onDragStart,
+} from "@/lib/editor-utils";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useautoRoboStore } from "@/store";
 import EditorCanvasIconHelper from "./editor-canvas-icon-helper";
-import { onDragStart } from "@/lib/editor-utils";
 import RenderConnectionAccordion from "./render-connections-accordion";
 import RenderOutputAccordion from "./render-outputs-accordion";
-// import RenderConnectionAccordion from './render-connection-accordion'
-// import RenderOutputAccordion from './render-output-accordian'
-// import { useFuzzieStore } from '@/store'
 
 type Props = {
   nodes: EditorNodeType[];
@@ -40,19 +36,19 @@ type Props = {
 const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { state } = useEditor();
   const { nodeConnection } = useNodeConnections();
-  //   const { googleFile, setSlackChannels } = useFuzzieStore()
+  const { googleFile, setSlackChannels } = useautoRoboStore();
   useEffect(() => {
     if (state) {
-      //   onConnections(nodeConnection, state, googleFile)
+      onConnections(nodeConnection, state, googleFile);
     }
   }, [state]);
 
   useEffect(() => {
     if (nodeConnection.slackNode.slackAccessToken) {
-      //   fetchBotSlackChannels(
-      //     nodeConnection.slackNode.slackAccessToken,
-      //     setSlackChannels
-      //   )
+      fetchBotSlackChannels(
+        nodeConnection.slackNode.slackAccessToken,
+        setSlackChannels
+      );
     }
   }, [nodeConnection]);
 
