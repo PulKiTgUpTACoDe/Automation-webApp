@@ -84,13 +84,20 @@ export const onCreateNewPageInDatabase = async (
   });
 
   console.log(databaseId);
+  // Retrieve the database schema to get the title property key
+  const dbInfo = await notion.databases.retrieve({ database_id: databaseId });
+  const titleProp = Object.entries(dbInfo.properties).find(
+    ([, prop]: any) => prop.type === "title"
+  );
+  const titleKey = titleProp ? titleProp[0] : "Name"; // fallback if not found
+
   const response = await notion.pages.create({
     parent: {
       type: "database_id",
       database_id: databaseId,
     },
     properties: {
-      name: {
+      [titleKey]: {
         title: [
           {
             text: {
@@ -102,6 +109,7 @@ export const onCreateNewPageInDatabase = async (
     },
   });
   if (response) {
+    console.log(response)
     return response;
   }
 };

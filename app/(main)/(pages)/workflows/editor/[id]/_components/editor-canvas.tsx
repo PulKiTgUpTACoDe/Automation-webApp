@@ -87,7 +87,7 @@ const EditorCanvas = (props: Props) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        (event.key === "Delete" || event.key === "Backspace") &&
+        (event.key === "Delete") &&
         state.editor.selectedNode?.id
       ) {
         handleDeleteNode(state.editor.selectedNode.id);
